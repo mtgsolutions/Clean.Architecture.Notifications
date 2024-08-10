@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34601.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DB6E8E4C-AC4F-4060-9E8B-3BF3DD153C6C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clean.Architecture.Notifications.Api", "Clean.Architecture.Notifications.Api", "{82AF8F34-0506-4A31-9F19-5A5734679A7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clean.Architecture.Notifications.Api", "Clean.Architecture.Notifications.Api\Clean.Architecture.Notifications.Api.csproj", "{3AD8140B-FA9A-4C59-8BF4-6D21C668F612}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3AD8140B-FA9A-4C59-8BF4-6D21C668F612}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AD8140B-FA9A-4C59-8BF4-6D21C668F612}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AD8140B-FA9A-4C59-8BF4-6D21C668F612}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AD8140B-FA9A-4C59-8BF4-6D21C668F612}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82AF8F34-0506-4A31-9F19-5A5734679A7D} = {DB6E8E4C-AC4F-4060-9E8B-3BF3DD153C6C}
+		{3AD8140B-FA9A-4C59-8BF4-6D21C668F612} = {82AF8F34-0506-4A31-9F19-5A5734679A7D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E34CB8F-2699-4F4A-BFBC-0BD7C4C043E7}
+	EndGlobalSection
+EndGlobal
