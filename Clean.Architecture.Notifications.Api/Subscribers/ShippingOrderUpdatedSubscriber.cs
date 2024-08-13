@@ -2,6 +2,8 @@
 using Clean.Architecture.Notifications.Api.Infrastructure.Contracts;
 using Clean.Architecture.Notifications.Api.Infrastructure.Implementations;
 using Clean.Architecture.Notifications.Api.Models;
+using Clean.Architecture.Notifications.Api.Options;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -17,12 +19,17 @@ public class ShippingOrderUpdatedSubscriber : BackgroundService
     private const string RoutingKeySubscribers = "shipping-order-updated";
     private readonly IServiceProvider _serviceProvider;
     private const string TrackingsExchange = "notifications-service";
+    private readonly RabbitMqOptions _options;
 
-    public ShippingOrderUpdatedSubscriber(IServiceProvider serviceProvider)
+    public ShippingOrderUpdatedSubscriber(IServiceProvider serviceProvider, IOptions<RabbitMqOptions> options)
     {
+        _options = options.Value;
         var factory = new ConnectionFactory
         {
-            HostName = "localhost"
+            HostName = _options.HostName,
+            UserName = _options.UserName,
+            Password = _options.Password,
+            Port = _options.Port
         };
 
         _connection = factory.CreateConnection("shipping-order-updated-consumer");
@@ -54,11 +61,9 @@ public class ShippingOrderUpdatedSubscriber : BackgroundService
     public async Task Notify(ShippingOrderUpdatedEvent @event)
     {
         using var scope = _serviceProvider.CreateScope();
-
         var notificationService = scope.ServiceProvider.GetRequiredService<INotificationService>();
-
+        Console.WriteLine($"Sending notification for shipping order {@event.TrackingNumber}");
         var template = new ShippingOrderUpdateTemplate(@event.TrackingNumber, @event.ContactEmail, @event.Description);
-
         await notificationService.Send(template);
     }
 }

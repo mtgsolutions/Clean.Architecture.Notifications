@@ -1,5 +1,6 @@
 ﻿using Clean.Architecture.Notifications.Api.Infrastructure.Contracts;
 using Clean.Architecture.Notifications.Api.Infrastructure.Implementations;
+using Clean.Architecture.Notifications.Api.Options;
 using Clean.Architecture.Notifications.Api.Subscribers;
 using SendGrid.Extensions.DependencyInjection;
 
@@ -12,6 +13,7 @@ namespace Clean.Architecture.Notifications.Api.DependencyInjections
             services
                 .AddEmailService(configuration)
                 .AddNotifications()
+                .AddRabbitMq(configuration)
                 .AddHostedService();
 
             return services;
@@ -37,6 +39,13 @@ namespace Clean.Architecture.Notifications.Api.DependencyInjections
         private static IServiceCollection AddHostedService(this IServiceCollection services)
         {
             services.AddHostedService<ShippingOrderUpdatedSubscriber>();
+
+            return services;
+        }
+
+        private static IServiceCollection AddRabbitMq(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<RabbitMqOptions>(options => configuration.GetSection("RabbitMq").Bind(options));
 
             return services;
         }
